@@ -29,15 +29,17 @@ class ViewController: UIViewController {
     
     let routeButton : UIButton = {
       let button = UIButton()
-        button.setImage(UIImage(named: "route66"), for: .normal)
+        button.setImage(UIImage(named: "route10"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
         return button
     } ()
     
     let resetButton : UIButton = {
       let button = UIButton()
-        button.setImage(UIImage(named: "reset"), for: .normal)
+        button.setImage(UIImage(named: "reset2"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
         return button
     } ()
     
@@ -108,22 +110,24 @@ extension ViewController {
 
         ])
         
-        
-  //      NSLayoutConstraint.activate([
- //           routeButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 50),
-    //        routeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -70),
-    //        routeButton.heightAnchor.constraint(equalToConstant: 70),
-    //        routeButton.widthAnchor.constraint(equalToConstant: 70)
+        mapView.addSubview(routeButton)
+        NSLayoutConstraint.activate([
+            routeButton.leadingAnchor.constraint(equalTo: mapView.leadingAnchor, constant: 20),
+            routeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            routeButton.heightAnchor.constraint(equalToConstant: 50),
+            routeButton.widthAnchor.constraint(equalToConstant: 80)
 
-    //    ])
+        ])
         
-    //    NSLayoutConstraint.activate([
-    //        resetButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 50),
-   //         resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),//
-   //         resetButton.heightAnchor.constraint(equalToConstant: 70),
-   //         resetButton.widthAnchor.constraint(equalToConstant: 70)
+        mapView.addSubview(resetButton)
+        
+        NSLayoutConstraint.activate([
+            resetButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -20),
+            resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            resetButton.heightAnchor.constraint(equalToConstant: 50),
+            resetButton.widthAnchor.constraint(equalToConstant: 80)
 
-   //     ])
+        ])
         
         
         
