@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F49936C926E6AA1700E9D74B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49936C826E6AA1700E9D74B /* Alert.swift */; };
 		F4AE40CE26E4F2C700A2E535 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE40CD26E4F2C700A2E535 /* AppDelegate.swift */; };
 		F4AE40D226E4F2C800A2E535 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AE40D126E4F2C800A2E535 /* ViewController.swift */; };
 		F4AE40D726E4F2C900A2E535 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4AE40D626E4F2C900A2E535 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F49936C826E6AA1700E9D74B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		F4AE40CA26E4F2C700A2E535 /* Junior Test Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Junior Test Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AE40CD26E4F2C700A2E535 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4AE40D126E4F2C800A2E535 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				F4AE40CD26E4F2C700A2E535 /* AppDelegate.swift */,
 				F4AE40D126E4F2C800A2E535 /* ViewController.swift */,
+				F49936C826E6AA1700E9D74B /* Alert.swift */,
 				F4AE40D626E4F2C900A2E535 /* Assets.xcassets */,
 				F4AE40D826E4F2C900A2E535 /* LaunchScreen.storyboard */,
 				F4AE40DB26E4F2C900A2E535 /* Info.plist */,
@@ -130,6 +133,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F49936C926E6AA1700E9D74B /* Alert.swift in Sources */,
 				F4AE40D226E4F2C800A2E535 /* ViewController.swift in Sources */,
 				F4AE40CE26E4F2C700A2E535 /* AppDelegate.swift in Sources */,
 			);
