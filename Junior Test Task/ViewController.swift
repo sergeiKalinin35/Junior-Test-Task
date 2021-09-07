@@ -74,13 +74,24 @@ class ViewController: UIViewController {
     }
 
     @objc func routeButtonTapped() {
-        print("TapRoute")
-
         
-    }
+        for index in 0...annotationsArray.count - 2 {
+            createDirectionRequest(startCoordinate: annotationsArray[index].coordinate, destinationCoordinate: annotationsArray[index + 1 ].coordinate)
+         }
+            mapView.showAnnotations(annotationsArray, animated: true)
+        }
     
     @objc func resetButtonTapped() {
-        print("TapReset")
+       
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
+        annotationsArray = [MKPointAnnotation]()
+        routeButton.isHidden = true
+        resetButton.isHidden = true
+        
+        
+        
+        
 
     }
     
