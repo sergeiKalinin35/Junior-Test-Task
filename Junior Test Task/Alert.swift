@@ -28,11 +28,6 @@ extension UIViewController {
         
         
         
-        
-        
-        
-        
-        
         let alertCancel = UIAlertAction(title: "Отмена", style: .default) { (_) in
             
         }

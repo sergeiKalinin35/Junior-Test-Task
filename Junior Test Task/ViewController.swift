@@ -43,9 +43,16 @@ class ViewController: UIViewController {
         return button
     } ()
     
+    // создаем массив для хранения наших аанотаций
+    var annotationsArray = [MKPointAnnotation]()
     
-    override func viewDidLoad() {
+    
+       override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mapView.delegate = self
+        
+        
         
         setConstraints()
         
@@ -60,8 +67,8 @@ class ViewController: UIViewController {
     @objc func addAdressButtonTapped() {
       //  print("TapAdd")
         // действие для кнопки
-        alertAddAdress(title: "ДОБАВИТЬ", placeholder: "Ведите адрес") { (text) in
-            print(text)
+        alertAddAdress(title: "ДОБАВИТЬ", placeholder: "Ведите адрес") { [self] (text) in
+            setupPlacemark(adressPlace: text)
         }
         
     }
@@ -80,7 +87,7 @@ class ViewController: UIViewController {
     private func setupPlacemark(adressPlace: String) {
         
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString("adress") { [self] (placemarks, error) in
+        geocoder.geocodeAddressString(adressPlace) { [self] (placemarks, error) in
             
             if let error = error {
                 print(error)
@@ -102,15 +109,85 @@ class ViewController: UIViewController {
             
             annotation.coordinate = placemarkLocation.coordinate
             
+            annotationsArray.append(annotation)
             
+            if annotationsArray.count > 2 {
+                routeButton.isHidden = false
+                resetButton.isHidden = false
+                
+            }
+            
+            mapView.showAnnotations(annotationsArray, animated: true)
         }
         
+    }
+    // постраение маршрута между двумя точками
+    private func createDirectionRequest(startCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D ) {
+          
+        let startLocation = MKPlacemark(coordinate: startCoordinate)
+        let destinationLocation = MKPlacemark(coordinate: destinationCoordinate)
+        
+        // делаем запрос
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startLocation)
+        request.destination = MKMapItem(placemark: destinationLocation)
+        
+        request.transportType =  .walking
+        request.requestsAlternateRoutes = true
         
         
+        // указываем diraction
+        let diraction = MKDirections(request: request)
+        diraction.calculate { [self] (responce, error) in
+            
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let responce = responce else {
+                alertError(title: "Ошибка", message: "Маршрут недоступен")
+                return
+            }
+            
+            var minRoute = responce.routes[0]
+            for route in responce.routes{
+                
+                minRoute = (route.distance < minRoute.distance) ? route : minRoute
+            }
+            self.mapView.addOverlay(minRoute.polyline)
+            
+        }
+        // отобразить polyline через extension
         
     }
     
 }
+
+extension ViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .red
+        return renderer
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 extension ViewController {
