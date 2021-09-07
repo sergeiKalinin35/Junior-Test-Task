@@ -58,7 +58,11 @@ class ViewController: UIViewController {
     }
     
     @objc func addAdressButtonTapped() {
-        print("TapAdd")
+      //  print("TapAdd")
+        // действие для кнопки
+        alertAddAdress(title: "ДОБАВИТЬ", placeholder: "Ведите адрес") { (text) in
+            print(text)
+        }
         
     }
 
@@ -71,19 +75,41 @@ class ViewController: UIViewController {
     @objc func resetButtonTapped() {
         print("TapReset")
 
+    }
+    
+    private func setupPlacemark(adressPlace: String) {
+        
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString("adress") { [self] (placemarks, error) in
+            
+            if let error = error {
+                print(error)
+                
+                alertError(title: adressPlace, message: "Сервер не доступен, введите адрес еще раз")
+                return
+            }
+            
+            guard let placemarks = placemarks else { return }
+            let placemark = placemarks.first
+            
+            // строим анотацию
+            
+            let annotation = MKPointAnnotation()
+            annotation.title = "\(adressPlace)"
+            
+            // координаты аннотации расположение
+            guard let placemarkLocation = placemark?.location else { return }
+            
+            annotation.coordinate = placemarkLocation.coordinate
+            
+            
+        }
+        
+        
+        
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 }
 
 
